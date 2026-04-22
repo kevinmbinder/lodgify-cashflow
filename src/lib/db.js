@@ -6,7 +6,10 @@ function getDb() {
   return neon(url);
 }
 
+let schemaReady = false;
+
 export async function initSchema() {
+  if (schemaReady) return;
   const sql = getDb();
   await sql`
     CREATE TABLE IF NOT EXISTS bookings (
@@ -23,6 +26,7 @@ export async function initSchema() {
       error TEXT
     )
   `;
+  schemaReady = true;
 }
 
 export async function syncBookings(bookings) {
