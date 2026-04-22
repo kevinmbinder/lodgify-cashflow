@@ -1,0 +1,100 @@
+export function getMockBookings() {
+  const today = new Date();
+  const d = (offset) => {
+    const x = new Date(today);
+    x.setDate(x.getDate() + offset);
+    return x.toISOString().slice(0, 10);
+  };
+  return [
+    {
+      id: 1,
+      guest_name: "Sarah Mitchell",
+      arrival_date: d(-2),
+      nights: 5,
+      source: "Airbnb",
+      total_price: 1240,
+      status: "confirmed",
+      created_at: d(-20),
+    },
+    {
+      id: 2,
+      guest_name: "James & Laura T.",
+      arrival_date: d(3),
+      nights: 3,
+      source: "VRBO",
+      total_price: 875,
+      status: "confirmed",
+      created_at: d(-14),
+    },
+    {
+      id: 3,
+      guest_name: "Carlos Reyes",
+      arrival_date: d(8),
+      nights: 7,
+      source: "Direct",
+      total_price: 1680,
+      status: "confirmed",
+      created_at: d(-10),
+    },
+    {
+      id: 4,
+      guest_name: "Priya Sharma",
+      arrival_date: d(14),
+      nights: 4,
+      source: "Airbnb",
+      total_price: 960,
+      status: "confirmed",
+      created_at: d(-5),
+    },
+    {
+      id: 5,
+      guest_name: "Tom Nguyen",
+      arrival_date: d(18),
+      nights: 2,
+      source: "VRBO",
+      total_price: 520,
+      status: "confirmed",
+      created_at: d(-8),
+    },
+    {
+      id: 6,
+      guest_name: "Diana Kowalski",
+      arrival_date: d(22),
+      nights: 6,
+      source: "Airbnb",
+      total_price: 1440,
+      status: "confirmed",
+      created_at: d(-3),
+    },
+    {
+      id: 7,
+      guest_name: "Ben & Amy Foster",
+      arrival_date: d(30),
+      nights: 3,
+      source: "Direct",
+      total_price: 720,
+      status: "confirmed",
+      created_at: d(-1),
+    },
+    {
+      id: 8,
+      guest_name: "Yuki Tanaka",
+      arrival_date: d(38),
+      nights: 5,
+      source: "Airbnb",
+      total_price: 1100,
+      status: "confirmed",
+      created_at: d(-2),
+    },
+    {
+      id: 9,
+      guest_name: "Marcus Webb",
+      arrival_date: d(44),
+      nights: 4,
+      source: "VRBO",
+      total_price: 980,
+      status: "confirmed",
+      created_at: d(-6),
+    },
+  ];
+}
