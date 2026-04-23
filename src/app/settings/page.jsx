@@ -57,6 +57,7 @@ function SectionLabel({ children }) {
 // ── Platform card ──────────────────────────────────────────────────────────────
 function PlatformCard({ platformKey, rule, onChange }) {
   const isSplit = rule.paymentType === "split";
+  const isDirectBooking = platformKey === "direct";
   const set = (field, value) => onChange({ ...rule, [field]: value });
 
   return (
@@ -219,7 +220,7 @@ function PlatformCard({ platformKey, rule, onChange }) {
         </div>
 
         {/* ── Payout schedule ── */}
-        <div>
+        {!isDirectBooking && <div>
           <SectionLabel>Payout Schedule</SectionLabel>
 
           {!isSplit ? (
@@ -306,7 +307,7 @@ function PlatformCard({ platformKey, rule, onChange }) {
               </div>
             </>
           )}
-        </div>
+        </div>}
 
         {/* ── Cancellation policy ── */}
         <div>
