@@ -242,15 +242,36 @@ input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
   .nav { padding: 0 20px; }
   .page { padding: 28px 16px; }
 
-  /* Timeline: show Guest, Platform, Receipt Date, Net */
-  .thead, .erow { grid-template-columns: 1fr 80px 110px 80px; }
-  .th:nth-child(3), .th:nth-child(4), .th:nth-child(6),
-  .erow .cell:nth-child(3), .erow .cell:nth-child(4), .erow .cell:nth-child(6) { display: none; }
+  /* Timeline: stacked 2×2 card — guest+net top row, platform+date bottom row */
+  .thead { display: none; }
+  .erow {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 4px 12px;
+    padding: 12px 16px;
+  }
+  .erow .cell:nth-child(1) { grid-column: 1; grid-row: 1; }
+  .erow .cell:nth-child(2) { grid-column: 1; grid-row: 2; }
+  .erow .cell:nth-child(3),
+  .erow .cell:nth-child(4),
+  .erow .cell:nth-child(6) { display: none; }
+  .erow .cell:nth-child(5) { grid-column: 2; grid-row: 2; text-align: right; }
+  .erow .cell:nth-child(7) { grid-column: 2; grid-row: 1; }
+  .anet { text-align: right; }
+  .rdate { font-size: 13px; }
+  .cbadge { display: none; }
 
-  /* Payments by Month: hide Gross, keep Month + Payments + Net */
-  .fhead, .frow { grid-template-columns: 1fr 70px 90px; }
-  .fhead > *:nth-child(3), .frow > *:nth-child(3) { display: none; }
-  .bar-track { width: 100%; }
+  /* Payments by Month: month name + net only */
+  .fhead { display: none; }
+  .frow {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 14px 16px;
+  }
+  .frow > *:nth-child(2),
+  .frow > *:nth-child(3) { display: none; }
+  .bar-track { display: none; }
 
   .evhead, .evrow { grid-template-columns: 100px 1fr 90px; }
   .evhead > *:nth-child(n+4), .evrow > *:nth-child(n+4) { display: none; }
