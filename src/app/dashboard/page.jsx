@@ -65,8 +65,8 @@ export default function DashboardPage() {
   const { events, loading, error, syncedAt } = useBookings(settings);
 
   const now = new Date();
-  const totalNet   = events.reduce((s, e) => s + e.net, 0);
-  const totalGross = events.reduce((s, e) => s + e.gross, 0);
+  const totalNet   = events.filter((e) => e.receiptDate >= now).reduce((s, e) => s + e.net, 0);
+  const totalGross = events.filter((e) => e.receiptDate >= now).reduce((s, e) => s + e.gross, 0);
   const next30     = events.filter((e) => { const d = daysFromNow(e.receiptDate); return d !== null && d >= 0 && d <= 30; }).reduce((s, e) => s + e.net, 0);
   const pending    = events.filter((e) => e.receiptDate >= now).length;
 
@@ -124,9 +124,9 @@ export default function DashboardPage() {
                 <div className="stat-sub">payments still to land</div>
               </div>
               <div className="stat">
-                <div className="stat-label">Gross Revenue</div>
+                <div className="stat-label">Future Bookings</div>
                 <div className="stat-value">{fmtMoney(totalGross)}</div>
-                <div className="stat-sub">before platform fees</div>
+                <div className="stat-sub">gross before platform fees</div>
               </div>
             </div>
 

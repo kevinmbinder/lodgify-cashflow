@@ -12,7 +12,7 @@ export default function Nav() {
   const pathname = usePathname();
   return (
     <nav className="nav">
-      <Link href="/dashboard" className="nav-brand">Lodgify Cash Flow</Link>
+      <Link href="/dashboard" className="nav-brand">Veronie Villa</Link>
       <div className="nav-tabs">
         {TABS.map((t) => (
           <Link

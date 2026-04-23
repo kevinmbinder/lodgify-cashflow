@@ -241,8 +241,17 @@ input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; }
   .hero-title { font-size: 30px; }
   .nav { padding: 0 20px; }
   .page { padding: 28px 16px; }
-  .thead, .erow { grid-template-columns: 1fr 90px 110px; }
-  .th:nth-child(n+4), .erow .cell:nth-child(n+4) { display: none; }
+
+  /* Timeline: show Guest, Platform, Receipt Date, Net */
+  .thead, .erow { grid-template-columns: 1fr 80px 110px 80px; }
+  .th:nth-child(3), .th:nth-child(4), .th:nth-child(6),
+  .erow .cell:nth-child(3), .erow .cell:nth-child(4), .erow .cell:nth-child(6) { display: none; }
+
+  /* Payments by Month: hide Gross, keep Month + Payments + Net */
+  .fhead, .frow { grid-template-columns: 1fr 70px 90px; }
+  .fhead > *:nth-child(3), .frow > *:nth-child(3) { display: none; }
+  .bar-track { width: 100%; }
+
   .evhead, .evrow { grid-template-columns: 100px 1fr 90px; }
   .evhead > *:nth-child(n+4), .evrow > *:nth-child(n+4) { display: none; }
 }
