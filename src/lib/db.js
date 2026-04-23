@@ -26,6 +26,13 @@ export async function initSchema() {
       error TEXT
     )
   `;
+  await sql`
+    CREATE TABLE IF NOT EXISTS app_settings (
+      key TEXT PRIMARY KEY,
+      data JSONB NOT NULL,
+      updated_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+    )
+  `;
   schemaReady = true;
 }
 
@@ -64,4 +71,20 @@ export async function getLastSyncedAt() {
   await initSchema();
   const rows = await sql`SELECT synced_at FROM sync_log ORDER BY synced_at DESC LIMIT 1`;
   return rows[0]?.synced_at ?? null;
+}
+
+export async function getSettings() {
+  const sql = getDb();
+  await initSchema();
+  const rows = await sql`SELECT data FROM app_settings WHERE key = 'fee_config' LIMIT 1`;
+  return rows[0]?.data ?? null;
+}
+
+export async function saveSettings(data) {
+  const sql = getDb();
+  await initSchema();
+  await sql`
+    INSERT INTO app_settings (key, data) VALUES ('fee_config', ${JSON.stringify(data)}::jsonb)
+    ON CONFLICT (key) DO UPDATE SET data = EXCLUDED.data, updated_at = NOW()
+  `;
 }
